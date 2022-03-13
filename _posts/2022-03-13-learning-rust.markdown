@@ -1,7 +1,7 @@
 ---
-layout: posts
+layout: post
 title: "Learning Rust"
-date: "2022-03-13-20:13:00 +0000"
+date: 2022-03-13 20:13:00 +0000
 categories: rust
 tags: rust
 ---
