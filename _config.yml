@@ -21,8 +21,8 @@
 title: trust the computer
 email: emmanuelawuah.dev@gmail.com 
 description: >- # this means to ignore newlines until "baseurl:"
-  Just an experimental blog. everything computer science.
-baseurl: "" # the subpath of your site, e.g. /blog
+  Just an experimental blog. Everything computer science.
+baseurl: "/blog" # the subpath of your site, e.g. /blog
 url: "github.com/emma-ea" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: emma_ea_
 github_username:  emma-ea
