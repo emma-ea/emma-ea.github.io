@@ -1,1 +1,72 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="github.com/emma-ea/feed.xml" rel="self" type="application/atom+xml" /><link href="github.com/emma-ea/" rel="alternate" type="text/html" /><updated>2022-11-20T12:02:54+00:00</updated><id>github.com/emma-ea/feed.xml</id><title type="html">trust the computer</title><subtitle>Just an experimental blog. Everything computer science.</subtitle></feed>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-26T00:34:32+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">trust the computer</title><subtitle>Just an experimental blog. Everything computer science.</subtitle><entry><title type="html">A/B System Updates Are Really Cool</title><link href="http://localhost:4000/android/2022/11/26/ab-system-updates-are-cool.html" rel="alternate" type="text/html" title="A/B System Updates Are Really Cool" /><published>2022-11-26T00:32:00+00:00</published><updated>2022-11-26T00:32:00+00:00</updated><id>http://localhost:4000/android/2022/11/26/ab-system-updates-are-cool</id><content type="html" xml:base="http://localhost:4000/android/2022/11/26/ab-system-updates-are-cool.html"><![CDATA[<p>One of the things that got me into programming, like most people, was movies. In my books, I’ve been a hacker-type programmer.
+tweaking every technology I can lay my hands on. well, including my mobile device. Running custom roms like Lineage or flashing Kali Net Hunter
+and going extreme with Ubuntu Touch. a variant of Ubuntu optimized and built to run on Android devices.</p>
+
+<p>In light of the foregoing, I have had the opportunity to successfully root my device in order to run some of these custom roms on my Android.
+device. Well, I soft-bricked the phone on a number of occasions.</p>
+
+<p>The weekend is here, and to do something hacky this time, I decided to root my current phone. I was even shocked that I haven’t done so. Damn, I have lost my powers.
+To root it, I first needed to install TWRP’s custom recovery image, which will allow me to boot into a custom recovery menu on my Android device.</p>
+
+<p>It gives me more tools to do things right away that the stock recovery that comes with devices does not.An example is that it makes installing custom roms much easier.</p>
+
+<p>But I’m not here to talk about Android roms and hacking Android. I’m still a beginner tinkerer here.</p>
+
+<p>with every device having its own set of instructions on how to root it. During my research, I stumbled on A/B system updates. and I think it’s really cool.
+I wanted to write a short piece about it.</p>
+
+<p>How did I get to know this? I needed to know the partition scheme of the target device in order to install twrp.This basically means that every
+An Android device has a structure or rule according to which its internal ROM is split up for data.
+These partitions could hold files like boot files; a partition could be setup for where logical drives are stored; etc.</p>
+
+<p>Two partition schemes came up in system updates: A/B and Legacy A. Let’s talk about A and  B, and you can make references as to how Legacy A could work.</p>
+
+<p>A/B system updates are also called seamless updates. This is due to how system updates, or OTA updates, are downloaded and patched into the operating system.
+With A/B, the system uses two partitions. The android system runs on one slot, which is called the current slot, and the other, unused slot, resides on the app.
+with the A (running system) slot having no access to it.</p>
+
+<p>During OTA updates, the current slot is updated, and the goal of the system B slot is to act as a failsafe for the operating system to fallback to in case the update breaks.
+the current system This could be the result of an error during or after an update.</p>
+
+<p>The android system, or if I could say it, the bootloader, decides which slot or partition to run based on a bootable attribute that determines the state of the system slot.
+marking it as safe for booting from it.</p>
+
+<p>Once the update is done, the A/B system has background jobs that prepare the system to boot into the updated version. to learn more about A/B system updates
+Check out the documentation on the source.android.com site.</p>
+
+<p>But here I want to talk a little about A/B system updates and how I was fascinated by it when I learned something like this was happening on a user’s device.
+It’s not happening on mine, at least.How did I know? Well, there is an adb command that lets you check if your device uses the legacy A or A/B system updates.</p>
+
+<p>The idea behind the new A/B system updates is to give ideas on how to write software for mobile devices or apps that are capable of withstanding severe error issues.
+It’s quite simple to consider.have two copies of the system. make one of the partitions usable due to system updates or bugs that cause problems
+the current system, fallback to a more stable version.</p>
+
+<p>I’m here thinking about ways I could write software, borrowing ideas from this system update concept.
+As we build systems that are consumer-facing, it’s necessary that our systems stay online as much as possible with minimal issues. Certain cataclysms could
+cause data loss or make a system dysfunctional, but the systems we build should be able to bounce back after all these.</p>
+
+<p>I hope you learned something from this. I’m just ranting about how cool I think this is and how it has added a new perspective on how to approach and build systems.</p>
+
+<p>I’m going to have to leave you here; keep hacking.</p>]]></content><author><name></name></author><category term="android" /><summary type="html"><![CDATA[One of the things that got me into programming, like most people, was movies. In my books, I’ve been a hacker-type programmer. tweaking every technology I can lay my hands on. well, including my mobile device. Running custom roms like Lineage or flashing Kali Net Hunter and going extreme with Ubuntu Touch. a variant of Ubuntu optimized and built to run on Android devices.]]></summary></entry><entry><title type="html">Learning Rust</title><link href="http://localhost:4000/rust/2022/03/13/learning-rust.html" rel="alternate" type="text/html" title="Learning Rust" /><published>2022-03-13T20:13:00+00:00</published><updated>2022-03-13T20:13:00+00:00</updated><id>http://localhost:4000/rust/2022/03/13/learning-rust</id><content type="html" xml:base="http://localhost:4000/rust/2022/03/13/learning-rust.html"><![CDATA[<p>I have thought of learning a new programming language. After googling for a while. i decided to start learning rust. 
+In this post, I’ll introduce you to the main concepts of programming in the rust language.</p>
+
+<p>Rust is basically a general purpose language that was built with performance and safety in mind. Rust boasts of safe concurrency
+and has its syntax similar to C++.</p>
+
+<p>Rust’s key feature: Memory safety.</p>]]></content><author><name></name></author><category term="rust" /><category term="rust" /><summary type="html"><![CDATA[I have thought of learning a new programming language. After googling for a while. i decided to start learning rust. In this post, I’ll introduce you to the main concepts of programming in the rust language.]]></summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/jekyll/update/2022/01/10/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2022-01-10T00:41:48+00:00</published><updated>2022-01-10T00:41:48+00:00</updated><id>http://localhost:4000/jekyll/update/2022/01/10/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2022/01/10/welcome-to-jekyll.html"><![CDATA[<p>You’ll find this post in your <code class="language-plaintext highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="language-plaintext highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+
+<p>Jekyll requires blog post files to be named according to the following format:</p>
+
+<p><code class="language-plaintext highlighter-rouge">YEAR-MONTH-DAY-title.MARKUP</code></p>
+
+<p>Where <code class="language-plaintext highlighter-rouge">YEAR</code> is a four-digit number, <code class="language-plaintext highlighter-rouge">MONTH</code> and <code class="language-plaintext highlighter-rouge">DAY</code> are both two-digit numbers, and <code class="language-plaintext highlighter-rouge">MARKUP</code> is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
+
+<p>Jekyll also offers powerful support for code snippets:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
+<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></code></pre></figure>
+
+<p>Check out the <a href="https://jekyllrb.com/docs/home">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/">Jekyll Talk</a>.</p>]]></content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html"><![CDATA[You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated. Jekyll requires blog post files to be named according to the following format: YEAR-MONTH-DAY-title.MARKUP Where YEAR is a four-digit number, MONTH and DAY are both two-digit numbers, and MARKUP is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works. Jekyll also offers powerful support for code snippets: def print_hi(name) puts "Hi, #{name}" end print_hi('Tom') #=&gt; prints 'Hi, Tom' to STDOUT. Check out the Jekyll docs for more info on how to get the most out of Jekyll. File all bugs/feature requests at Jekyll’s GitHub repo. If you have questions, you can ask them on Jekyll Talk.]]></summary></entry></feed>

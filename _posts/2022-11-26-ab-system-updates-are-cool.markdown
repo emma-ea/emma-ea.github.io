@@ -1,0 +1,56 @@
+---
+layout: post
+title: "A/B System Updates Are Really Cool"
+date: 2022-11-26 00:32:00 +0000
+categories: android
+---
+One of the things that got me into programming, like most people, was movies. In my books, I've been a hacker-type programmer.
+tweaking every technology I can lay my hands on. well, including my mobile device. Running custom roms like Lineage or flashing Kali Net Hunter
+and going extreme with Ubuntu Touch. a variant of Ubuntu optimized and built to run on Android devices.
+
+In light of the foregoing, I have had the opportunity to successfully root my device in order to run some of these custom roms on my Android.
+device. Well, I soft-bricked the phone on a number of occasions.
+
+The weekend is here, and to do something hacky this time, I decided to root my current phone. I was even shocked that I haven't done so. Damn, I have lost my powers.
+To root it, I first needed to install TWRP's custom recovery image, which will allow me to boot into a custom recovery menu on my Android device.
+
+It gives me more tools to do things right away that the stock recovery that comes with devices does not.An example is that it makes installing custom roms much easier.
+
+But I'm not here to talk about Android roms and hacking Android. I'm still a beginner tinkerer here.
+
+with every device having its own set of instructions on how to root it. During my research, I stumbled on A/B system updates. and I think it's really cool.
+I wanted to write a short piece about it.
+
+How did I get to know this? I needed to know the partition scheme of the target device in order to install twrp.This basically means that every
+An Android device has a structure or rule according to which its internal ROM is split up for data.
+These partitions could hold files like boot files; a partition could be setup for where logical drives are stored; etc.
+
+Two partition schemes came up in system updates: A/B and Legacy A. Let's talk about A and  B, and you can make references as to how Legacy A could work.
+
+A/B system updates are also called seamless updates. This is due to how system updates, or OTA updates, are downloaded and patched into the operating system.
+With A/B, the system uses two partitions. The android system runs on one slot, which is called the current slot, and the other, unused slot, resides on the app.
+with the A (running system) slot having no access to it.
+
+During OTA updates, the current slot is updated, and the goal of the system B slot is to act as a failsafe for the operating system to fallback to in case the update breaks.
+the current system This could be the result of an error during or after an update.
+
+The android system, or if I could say it, the bootloader, decides which slot or partition to run based on a bootable attribute that determines the state of the system slot.
+marking it as safe for booting from it.
+
+Once the update is done, the A/B system has background jobs that prepare the system to boot into the updated version. to learn more about A/B system updates
+Check out the documentation on the source.android.com site.
+
+But here I want to talk a little about A/B system updates and how I was fascinated by it when I learned something like this was happening on a user's device.
+It's not happening on mine, at least.How did I know? Well, there is an adb command that lets you check if your device uses the legacy A or A/B system updates.
+
+The idea behind the new A/B system updates is to give ideas on how to write software for mobile devices or apps that are capable of withstanding severe error issues.
+It's quite simple to consider.have two copies of the system. make one of the partitions usable due to system updates or bugs that cause problems
+the current system, fallback to a more stable version.
+
+I'm here thinking about ways I could write software, borrowing ideas from this system update concept.
+As we build systems that are consumer-facing, it's necessary that our systems stay online as much as possible with minimal issues. Certain cataclysms could
+cause data loss or make a system dysfunctional, but the systems we build should be able to bounce back after all these.
+
+I hope you learned something from this. I'm just ranting about how cool I think this is and how it has added a new perspective on how to approach and build systems.
+
+I'm going to have to leave you here; keep hacking.
