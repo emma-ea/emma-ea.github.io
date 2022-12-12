@@ -1,0 +1,37 @@
+I"^<p>I recently got to work on a flutter project and I had to use websockets. Being the first time using the protocol I initially 
+a couple of mistakes like using the HTTP’s protocol scheme as part of the URL scheme. I know you’re laughing at me now,
+but it was my first time implementing websockets in an app.</p>
+
+<p>With the idea that most things work similar, I went ahead without looking much into documentations or articles as to how 
+websockets work. After some Googling, I learned enough on websockets to get my application running and I think websockets is
+a cool protocol that is a must to use when you find yourself with a suitable usecase.</p>
+
+<h2 id="define-websockets">Define Websockets</h2>
+
+<p>Websockets are a communication protocol that is considered to be an upgrade over HTTP. The main catch with websockets is, unlike
+traditional HTTP connections where after a client receives a response from a request it make to a server, the server closes 
+the connection. There are other techniques of keeping the connection alive but as I studied more into Websockets and HTTP 
+protocols, I got to know this ‘keep-alive’ state set for HTTP protocols may have its downsides.</p>
+
+<p>Hope to cover more on that, back to websockets, The entire idea behind websockets is once a connection is created with the server,
+there is bi-directional, full-duplex communication link established. This comes with the perk of being low-latent. Low latency in
+computer networks mean there is minimal delay in processing volumes of data messages. Hence its suitable for online multiplayer
+games, chat applications, sports or financial applications where change in data should be readily available to users/clients.</p>
+
+<h2 id="more">More</h2>
+
+<p>Unlike HTTP, Websockets also have their url scheme which helps identify websocket connections.
+An example in Dart/Flutter:</p>
+
+<p>`
+// parse uri
+val uri = Uri.parse(“ws://some-realtime-app”);
+val channel = IOWebSocketChannel.connect(uri);</p>
+
+<p>// send message
+channel.sink.add(jsonEncode({“user”: “john doe”}));</p>
+
+<p>// listen to server
+channel.stream.listen((event){});
+`</p>
+:ET

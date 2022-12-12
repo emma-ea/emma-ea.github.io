@@ -1,4 +1,73 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-26T00:34:32+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">trust the computer</title><subtitle>Just an experimental blog. Everything computer science.</subtitle><entry><title type="html">A/B System Updates Are Really Cool</title><link href="http://localhost:4000/android/2022/11/26/ab-system-updates-are-cool.html" rel="alternate" type="text/html" title="A/B System Updates Are Really Cool" /><published>2022-11-26T00:32:00+00:00</published><updated>2022-11-26T00:32:00+00:00</updated><id>http://localhost:4000/android/2022/11/26/ab-system-updates-are-cool</id><content type="html" xml:base="http://localhost:4000/android/2022/11/26/ab-system-updates-are-cool.html"><![CDATA[<p>One of the things that got me into programming, like most people, was movies. In my books, I’ve been a hacker-type programmer.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-12T20:31:19+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">trust the computer</title><subtitle>Just an experimental blog. Everything computer science.</subtitle><entry><title type="html">Working with Websockets</title><link href="http://localhost:4000/android,/flutter/2022/12/12/working-with-websockets.html" rel="alternate" type="text/html" title="Working with Websockets" /><published>2022-12-12T19:27:00+00:00</published><updated>2022-12-12T19:27:00+00:00</updated><id>http://localhost:4000/android,/flutter/2022/12/12/working-with-websockets</id><content type="html" xml:base="http://localhost:4000/android,/flutter/2022/12/12/working-with-websockets.html"><![CDATA[<p>I recently got to work on a Flutter project, and I had to use websockets. Being the first time using the protocol, I initially
+a couple of mistakes, like using the HTTP protocol scheme as part of the URL scheme. I know you’re laughing at me now,
+but it was my first time implementing websockets in an app.</p>
+
+<p>With the idea that most things work similarly, I went ahead without looking much into documentation or articles as to how
+websockets work. After some Googling, I learned enough about websockets to get my application running, and I think websockets is
+a cool protocol that you should use if you have a suitable use case.</p>
+
+<h3 id="define-websockets">Define Websockets</h3>
+
+<p>Websockets is a communication protocol that is considered an upgrade over HTTP. The main catch with web sockets is that, unlike
+traditional HTTP connections, where after a client receives a response from a request it makes to a server, the server closes
+the connection. There are other techniques for persisting or keeping the connection alive, but as I studied more
+into Websockets and HTTP protocols, I got to know this “keep-alive” setting for HTTP protocols may have its downsides.</p>
+
+<p>Going back to web sockets, I hope to cover more on that.The entire idea behind websockets is that once a connection is created 
+with the server, There is a bi-directional, full-duplex communication link established. This comes with the perk of being 
+low-latent. <code class="language-plaintext highlighter-rouge">Low latency in computer networks mean there is minimal delay in processing volumes of data messages.</code> Hence its suitable 
+for online multiplayer games, chat applications, sports or financial applications where change in data should be readily available 
+to users/clients.</p>
+
+<h3 id="style">Style</h3>
+
+<p>Unlike HTTP, websockets also have their own url scheme, which helps identify websocket connections.
+An example in Dart/Flutter:</p>
+
+<figure class="highlight"><pre><code class="language-dart" data-lang="dart"><span class="c1">// parse uri</span>
+<span class="n">val</span> <span class="n">uri</span> <span class="o">=</span> <span class="n">Uri</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"ws://some-realtime-app"</span><span class="o">);</span>
+<span class="n">val</span> <span class="n">channel</span> <span class="o">=</span> <span class="n">IOWebSocketChannel</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
+
+<span class="c1">// send message</span>
+<span class="n">channel</span><span class="o">.</span><span class="na">sink</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"some-message-to-server"</span><span class="o">);</span>
+
+<span class="c1">// listen to server</span>
+<span class="n">channel</span><span class="o">.</span><span class="na">stream</span><span class="o">.</span><span class="na">listen</span><span class="o">((</span><span class="n">event</span><span class="o">){</span> <span class="cm">/* handle some response stream */</span> <span class="o">});</span></code></pre></figure>
+
+<p>This connection establishment happens over a single TCP connection, and attaching event handlers allows you to know the state of
+of the connection. In Dart/Flutter, the web_socket_channel package provides a cross-platform wrapper to use websocket connections.
+on Android and iOS devices. Take a look at the package on Flutter pub.dev if you want to play around with it.</p>
+
+<h3 id="websockets-usecases">WebSockets Usecases</h3>
+
+<p>Because most applications require real-time data to be consumed by their clients, it is critical that you understand the use case of 
+the application or project and select the appropriate technology. I’ve attempted to list a couple of use cases that require 
+websockets implementation below: </p>
+
+<ul>
+  <li>Financial tickers</li>
+  <li>Multiplayer games</li>
+  <li>Sports updates</li>
+  <li>Social Feeds / Messaging / Chat applications</li>
+  <li>Location-based apps</li>
+</ul>
+
+<h3 id="my-take">My take</h3>
+
+<p>Initially not being familiar with websockets, I intended on building the project that introduced me to websockets by using a
+technique called Periodic Polling,  where after a certain duration, the client device makes a request to the server for new data,
+If any, the fetch data is updated. Actually, this was my initial idea for solving the issue of getting real-time data.</p>
+
+<p>This not only has some downsides like HTTP overhead, constant querying for new data. But it would also take additional time.
+implementing this periodic scheduling for data. I’m fairly new to this, and after reading in a few places, I discovered
+there are other methods, like <code class="language-plaintext highlighter-rouge">Long Polling</code> by which the connection to the server is kept alive and the server returns
+a “new” response after a certain period.</p>
+
+<p>Looking at websockets, once the connection is established and messages are sent to the server. There will be no need to constantly 
+query the server for new data, unless a different message is sent for new data. You just have to setup a listener, and once new 
+data becomes available, it is sent to its consumers.</p>
+
+<p>To end here, I think Websockets are a cool protocol. I hope to use it more and experiment with it. see you in the next one.</p>]]></content><author><name></name></author><category term="android," /><category term="flutter" /><summary type="html"><![CDATA[I recently got to work on a Flutter project, and I had to use websockets. Being the first time using the protocol, I initially a couple of mistakes, like using the HTTP protocol scheme as part of the URL scheme. I know you’re laughing at me now, but it was my first time implementing websockets in an app.]]></summary></entry><entry><title type="html">A/B System Updates Are Really Cool</title><link href="http://localhost:4000/android/2022/11/26/ab-system-updates-are-cool.html" rel="alternate" type="text/html" title="A/B System Updates Are Really Cool" /><published>2022-11-26T00:32:00+00:00</published><updated>2022-11-26T00:32:00+00:00</updated><id>http://localhost:4000/android/2022/11/26/ab-system-updates-are-cool</id><content type="html" xml:base="http://localhost:4000/android/2022/11/26/ab-system-updates-are-cool.html"><![CDATA[<p>One of the things that got me into programming, like most people, was movies. In my books, I’ve been a hacker-type programmer.
 tweaking every technology I can lay my hands on. well, including my mobile device. Running custom roms like Lineage or flashing Kali Net Hunter
 and going extreme with Ubuntu Touch. a variant of Ubuntu optimized and built to run on Android devices.</p>
 
