@@ -1,4 +1,0 @@
-I"=<p>I recently got to work on a flutter project and I had to use websockets. Being the first time using the protocol I initially 
-a couple of mistakes like using the HTTP’s protocol scheme as part of the URL scheme. I know you’re laughing at me now,
-but it was my first time implementing websockets in an app.</p>
-:ET
