@@ -29,4 +29,82 @@ The wizard presents you with some options, from which you must choose yes or no.
 
 ## Vue components
 
-Vue components can be dev
+Vue components are written in "Single-File Component (SFC)" format; this term just describes how you layout your component code. Your component code is separated into ```template```, ```script```, and ```style``` sections. To create a Vue component, create a new file and name it with a ```.vue``` extension. Your html code goes into the template section; the script section contains javascript code for rendering html code based on some state or data; and finally, the style section contains styling code.
+
+sample code
+
+{% highlight liquid %}
+    {% raw %}
+// filename: Hello.vue
+
+<script>
+    export default {
+        data() {
+            return {
+                text: 'Hello, World'
+            }
+        }
+    }
+</script>
+
+<template>
+    // {{ code }} allows interaction with Javascript expressions
+    <p> {{ text }} </p>
+</template>
+
+<style>
+    p {
+        font-weight: bold;
+        font-size: 32px;
+        color: green;
+    }
+</style>
+
+{% endraw %}
+{% endhighlight %}
+
+Vue components can be developed either using the ```Options``` API or the ```Composition API```. These two just define how you describe the component's logic. With the Options API, you have an object of options such as data, computed, and methods. The Composition API defines your component's logic using import API functions. The Composition API is seen as being much more concise and letting you do more with less code. But both options are capable, and whoever you choose will be based largely on your preferences. The Options API seems to be more beginner-friendly, and people coming from an OOP background will be able to easily adopt it. The Composition API seems to be tied more to a reactive style of programming.
+
+Sample code for comparison
+
+{% highlight liquid %}
+    {% raw %}
+// Options API
+<script>
+    export default {
+        data() {
+            return {
+                text: 'Hello'
+            }
+        }
+    }   
+</script>
+
+<template>
+    <h1>{{ text }}</h1>
+</template>
+
+    {% endraw %}
+{% endhighlight %}
+
+{% highlight liquid %}
+    {% raw %}
+// Composition API
+<script>
+    import { ref } from 'vue'
+    // store text value in a reactive state
+    const text = ref('Hello')
+</script>
+
+<template>
+    <h1>{{ text }}</h1>
+</template>
+
+    {% endraw %}
+{% endhighlight %}
+
+These sample codes above describe what's known as declarative rendering, which is a core Vue feature where, using template syntax extending HTML, we describe how the HTML should look based on Javascript state, and when the state changes, HTML automatically updates itself.
+
+## Let's end here
+
+Vue declarative and component-based styles of building user interfaces should be easy to pick up for anybody wanting a framework with a low learning curve and low barrier of entry. As I keep on learning Vue, I will dive into more Vue features and document everything I have been learning here. So far, I have been liking the experience, and I really intend on gaining some vue skills.
