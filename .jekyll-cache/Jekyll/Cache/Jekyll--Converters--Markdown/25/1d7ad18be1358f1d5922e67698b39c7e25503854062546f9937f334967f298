@@ -1,0 +1,2 @@
+I"<p>UI feels pretty cool when a touch of animation is sprinkled all over it. It’s been a couple of days since I started diving into Flutter animations. Most of the animations I do are quite simple and require you to just use a widget, and the animation task is done for you. These widgets are called implicit animations. They are basically animations that are controlled by the framework. These types of animations are mostly used for simple tasks like animating the size change of a container or the opacity or color of a widget.</p>
+:ET
