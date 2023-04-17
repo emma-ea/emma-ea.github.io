@@ -29,5 +29,6 @@ Tweens are quite simple; they let you specify the beginning and ending values of
 
 With these three classes and a bit more comfort in understanding how they work, you can get started animating widgets explicitly.
 
-### An Example
+### Let's continue in part 2
 
+I felt like this piece would be getting longer, so I have broken it down into two parts. Check out Explicit Animations in Flutter 2 for an example project I worked on.
