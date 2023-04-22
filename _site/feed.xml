@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-04-22T21:11:35+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">trust the computer</title><subtitle>Just an experimental blog. Everything computer science.</subtitle><entry><title type="html">Explicit Animations in Flutter 2</title><link href="http://localhost:4000/android,/flutter/2023/04/22/animating-widgets-flutter-part-2.html" rel="alternate" type="text/html" title="Explicit Animations in Flutter 2" /><published>2023-04-22T20:23:00+00:00</published><updated>2023-04-22T20:23:00+00:00</updated><id>http://localhost:4000/android,/flutter/2023/04/22/animating-widgets-flutter-part-2</id><content type="html" xml:base="http://localhost:4000/android,/flutter/2023/04/22/animating-widgets-flutter-part-2.html"><![CDATA[<p>In the previous post, I explained how to get started with explicit animation in Flutter. In this post, I’ll walk you through how to build a simple animation using all the classes I mentioned. We’re going to make a hand-waving animation using the wave hand emoji.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-04-22T22:00:28+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">trust the computer</title><subtitle>Just an experimental blog. Everything computer science.</subtitle><entry><title type="html">Explicit Animations in Flutter 2</title><link href="http://localhost:4000/android,/flutter/2023/04/22/animating-widgets-flutter-part-2.html" rel="alternate" type="text/html" title="Explicit Animations in Flutter 2" /><published>2023-04-22T20:23:00+00:00</published><updated>2023-04-22T20:23:00+00:00</updated><id>http://localhost:4000/android,/flutter/2023/04/22/animating-widgets-flutter-part-2</id><content type="html" xml:base="http://localhost:4000/android,/flutter/2023/04/22/animating-widgets-flutter-part-2.html"><![CDATA[<p>In the previous post, I explained how to get started with explicit animation in Flutter. In this post, I’ll walk you through how to build a simple animation using all the classes I mentioned. We’re going to make a hand-waving animation using the wave hand emoji.</p>
 
 <h3 id="setting-up-your-project">Setting up your project</h3>
 
@@ -55,6 +55,8 @@ class MyAppState extends State&lt;MyApp&gt; {
     late Animation _waveAnim;
     late Tween _waveTween;
 
+    int waveDuration = 150;
+
     @override
     void initState() {
         super.initState();
@@ -80,7 +82,75 @@ class MyAppState extends State&lt;MyApp&gt; {
 
     ....
 
-}</code></pre></figure>]]></content><author><name></name></author><category term="android," /><category term="flutter" /><summary type="html"><![CDATA[In the previous post, I explained how to get started with explicit animation in Flutter. In this post, I’ll walk you through how to build a simple animation using all the classes I mentioned. We’re going to make a hand-waving animation using the wave hand emoji.]]></summary></entry><entry><title type="html">Explicit Animations in Flutter</title><link href="http://localhost:4000/android,/flutter/2023/04/16/animating-widgets-flutter.html" rel="alternate" type="text/html" title="Explicit Animations in Flutter" /><published>2023-04-16T16:21:00+00:00</published><updated>2023-04-16T16:21:00+00:00</updated><id>http://localhost:4000/android,/flutter/2023/04/16/animating-widgets-flutter</id><content type="html" xml:base="http://localhost:4000/android,/flutter/2023/04/16/animating-widgets-flutter.html"><![CDATA[<p>UI feels pretty cool when a touch of animation is sprinkled all over it. It’s been a couple of days since I started diving into Flutter animations. Most of the animations I do are quite simple and require you to just use a widget, and the animation task is done for you. These widgets are called implicit animations. They are basically animations that are controlled by the framework. These types of animations are mostly used for simple tasks like animating the size change of a container or the opacity or color of a widget.</p>
+}</code></pre></figure>
+
+<h3 id="putting-together-the-needed-widgets">Putting together the needed widgets</h3>
+
+<p>In this project, I made use of the <code class="language-plaintext highlighter-rouge">animated builder</code> widget, the <code class="language-plaintext highlighter-rouge">transform</code> widget, and a <code class="language-plaintext highlighter-rouge">text</code> widget to hold a wave hand emoji.</p>
+
+<p><code class="language-plaintext highlighter-rouge">AnimatedBuilder</code> widget is a general-purpose widget for building animations. This widget provides a way to handle complex animations while making sure it doesn’t sacrifice performance, optimizing the animation as it renders.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Transform</code> widget applies transformation to its child before painting it on screen. In our use case, we will be applying a rotation on the z-axis to a <code class="language-plaintext highlighter-rouge">Text</code> widget and animating it back and forth; this will in turn create a hand wave animation.</p>
+
+<figure class="highlight"><pre><code class="language-liquid" data-lang="liquid">Widget _buildWaveHand() {
+    return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+            Text(
+                'Hello there',
+                style: GoogleFonts.lexend(fontSize: 24),
+            ),
+            AnimatedBuilder(
+                animation: _waveAnim,
+                builder: (context, child) {
+                    return Transform(
+                        key: const Key('transformer'),
+                        transform: Matrix4.identity()
+                            ..rotateZ(_waveAnim.value.toRad),
+                        alignment: Alignment.bottomRight,
+                        child: child,
+                    );
+                },
+                child: GestureDetector(
+                    onTap: _startWaveAnim,
+                    child: const Text(
+                        key: Key('wave-emoji'),
+                        style: TextStyle(fontSize: 24),
+                    ),
+                ),
+            ),
+        ]
+    );
+}
+
+void _startWaveAnim() {
+    final ticker = _waveController.repeat(reverse: true);
+    ticker.timeout(
+        Duration(milliseconds: waveDuration * 6),
+        onTimeout: () {
+            _waveController.stop();
+            _waveController.animateTo(0);
+        }
+    );
+}
+
+extension on double {
+    // you'll need to import dart:math to access pi.
+    // rotateZ angle is required to be in radians
+    double get toRad =&gt; this * (pi / 180);
+}</code></pre></figure>
+
+<p>In order to apply the transform, we use <code class="language-plaintext highlighter-rouge">rotateZ</code> from the <code class="language-plaintext highlighter-rouge">Matrix4</code> class. An <code class="language-plaintext highlighter-rouge">identity</code> is applied to the matrix to prepare for any transformation.</p>
+
+<p>I have a text widget wrapped in a <code class="language-plaintext highlighter-rouge">gesture detector</code> that listens for tap events and triggers the animation to start when the event is detected.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">_startWaveAnim</code> method uses the <code class="language-plaintext highlighter-rouge">repeat</code> method of the animation controller class, which repeats the animation indefinitely. In order to stop the animation after a certain duration, we use a <code class="language-plaintext highlighter-rouge">Ticker</code> returned by the repeat method to manually timeout the animation.</p>
+
+<p>You can insert this <code class="language-plaintext highlighter-rouge">_buildWaveHand</code> in your widget tree and you should be good to go.</p>
+
+<h3 id="ending-here">Ending here</h3>
+
+<p>So far, we have been able to build a simple wave hand animation, and I hope you enjoyed the journey. If I missed something or made any blunders, kindly reach out. and let me know if there are any corrections to be made. I rarely build explicit animations, so this project and post really let me dive deep into the classes when I was preparing this post. Thanks for reading.</p>]]></content><author><name></name></author><category term="android," /><category term="flutter" /><summary type="html"><![CDATA[In the previous post, I explained how to get started with explicit animation in Flutter. In this post, I’ll walk you through how to build a simple animation using all the classes I mentioned. We’re going to make a hand-waving animation using the wave hand emoji.]]></summary></entry><entry><title type="html">Explicit Animations in Flutter</title><link href="http://localhost:4000/android,/flutter/2023/04/16/animating-widgets-flutter.html" rel="alternate" type="text/html" title="Explicit Animations in Flutter" /><published>2023-04-16T16:21:00+00:00</published><updated>2023-04-16T16:21:00+00:00</updated><id>http://localhost:4000/android,/flutter/2023/04/16/animating-widgets-flutter</id><content type="html" xml:base="http://localhost:4000/android,/flutter/2023/04/16/animating-widgets-flutter.html"><![CDATA[<p>UI feels pretty cool when a touch of animation is sprinkled all over it. It’s been a couple of days since I started diving into Flutter animations. Most of the animations I do are quite simple and require you to just use a widget, and the animation task is done for you. These widgets are called implicit animations. They are basically animations that are controlled by the framework. These types of animations are mostly used for simple tasks like animating the size change of a container or the opacity or color of a widget.</p>
 
 <p>I want to try something different this time, and that led me into researching explicit animations. With these types of animations, you have mostly full control over the animation, including when it starts, how long it takes, the beginning and ending of the animation values, etc. Explicit animations put animations on steroids, and with much familiarity, you can do amazing things. I have been motivated a lot by demos and showcases being put out there by the community, and I decided to give it a try. Animate a simple thing: a hand wave emoji.</p>
 
