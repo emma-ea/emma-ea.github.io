@@ -185,7 +185,11 @@ I have a text widget wrapped in a `gesture detector` that listens for tap events
 
 The `_startWaveAnim` method uses the `repeat` method of the animation controller class, which repeats the animation indefinitely. In order to stop the animation after a certain duration, we use a `Ticker` returned by the repeat method to manually timeout the animation.
 
-You can insert this `_buildWaveHand` in your widget tree and you should be good to go.
+You can insert this `_buildWaveHand` in your widget tree and you should be good to go. Here we go; this is what I have. If you follow this post, the emoji on your device may be different. This is because each manufacturer has its own implementation of emoji ISO codes.
+
+![wave hand giff](/assets/wave_hand_anim.gif)
+
+
 
 ### Ending here
 
