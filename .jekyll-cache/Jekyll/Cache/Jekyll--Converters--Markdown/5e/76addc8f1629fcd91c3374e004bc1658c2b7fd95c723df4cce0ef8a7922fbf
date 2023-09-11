@@ -1,4 +1,4 @@
-I"l<p>I recently got to work on a Flutter project, and I had to use websockets. Being the first time using the protocol, I initially
+I"m<p>I recently got to work on a Flutter project, and I had to use websockets. Being the first time using the protocol, I initially
 a couple of mistakes, like using the HTTP protocol scheme as part of the URL scheme. I know you’re laughing at me now,
 but it was my first time implementing websockets in an app.</p>
 
@@ -25,14 +25,14 @@ to users/clients.</p>
 An example in Dart/Flutter:</p>
 
 <figure class="highlight"><pre><code class="language-dart" data-lang="dart"><span class="c1">// parse uri</span>
-<span class="n">val</span> <span class="n">uri</span> <span class="o">=</span> <span class="n">Uri</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"ws://some-realtime-app"</span><span class="o">);</span>
-<span class="n">val</span> <span class="n">channel</span> <span class="o">=</span> <span class="n">IOWebSocketChannel</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
+<span class="n">val</span> <span class="n">uri</span> <span class="o">=</span> <span class="kt">Uri</span><span class="o">.</span><span class="na">parse</span><span class="p">(</span><span class="s">"ws://some-realtime-app"</span><span class="p">);</span>
+<span class="n">val</span> <span class="n">channel</span> <span class="o">=</span> <span class="n">IOWebSocketChannel</span><span class="o">.</span><span class="na">connect</span><span class="p">(</span><span class="n">uri</span><span class="p">);</span>
 
 <span class="c1">// send message</span>
-<span class="n">channel</span><span class="o">.</span><span class="na">sink</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"some-message-to-server"</span><span class="o">);</span>
+<span class="n">channel</span><span class="o">.</span><span class="na">sink</span><span class="o">.</span><span class="na">add</span><span class="p">(</span><span class="s">"some-message-to-server"</span><span class="p">);</span>
 
 <span class="c1">// listen to server</span>
-<span class="n">channel</span><span class="o">.</span><span class="na">stream</span><span class="o">.</span><span class="na">listen</span><span class="o">((</span><span class="n">event</span><span class="o">){</span> <span class="cm">/* handle some response stream */</span> <span class="o">});</span></code></pre></figure>
+<span class="n">channel</span><span class="o">.</span><span class="na">stream</span><span class="o">.</span><span class="na">listen</span><span class="p">((</span><span class="n">event</span><span class="p">){</span> <span class="cm">/* handle some response stream */</span> <span class="p">});</span></code></pre></figure>
 
 <p>This connection establishment happens over a single TCP connection, and attaching event handlers allows you to know the state of
 of the connection. In Dart/Flutter, the web_socket_channel package provides a cross-platform wrapper to use websocket connections.
