@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-Hello, my name is Emmanuel, and I'm a software engineer with experience in Android development, Flutter, Material UI design, with the willingness to learn and master new technologies as needed.
+Hello, my name is Emmanuel, and I'm a software engineer with experience in enterprise Java web development, mobile development(native Android & Flutter), Desktop applications, Material UI design, with the willingness to learn and master new technologies as needed.
 
 I'm currently learning how to write technical content by sharing my own experiences.
 
